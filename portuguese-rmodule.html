@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramenta de Compreensão de Leitura</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="settings">
+        <label>Tamanho da fonte: <input type="range" id="fontSize" min="14" max="24" value="16"></label>
+        <label>Espaçamento: <input type="range" id="textSpacing" min="1" max="5" value="1.5"></label>
+        <label>Cor de fundo: 
+            <select id="bgColor">
+                <option value="white">Branco</option>
+                <option value="lightgray">Cinza Claro</option>
+                <option value="beige">Bege</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="content">
+        <h2>As Estações do Ano no Brasil</h2>
+        <p id="text">
+            O Brasil é um país tropical com diferentes tipos de clima. As estações do ano são: verão, outono, inverno e primavera.<br>
+            No verão, as temperaturas são altas e as praias ficam cheias de turistas. O outono é uma estação de transição, com temperaturas mais amenas e folhas caindo das árvores. No inverno, principalmente no sul do Brasil, o frio pode ser intenso e até nevar em algumas regiões. Já a primavera é conhecida pelas flores que desabrocham e pelo clima agradável.<br>
+            Cada estação tem suas características e influenciam o dia a dia dos brasileiros. Durante o verão, as pessoas aproveitam para viajar e ir à praia. No inverno, há festas tradicionais como a Festa Junina, muito popular em todo o país.
+        </p>
+        <button onclick="addNote()">Adicionar Nota</button>
+    </div>
+
+    <div class="notes-section">
+        <h3>Notas</h3>
+        <ul id="notesList"></ul>
+    </div>
+
+    <div class="summary">
+        <h3>Resumo do Texto</h3>
+        <p>
+            O Brasil tem quatro estações distintas. O verão é quente e movimentado, o outono traz temperaturas mais amenas, o inverno pode ser frio no sul, e a primavera traz flores e clima agradável. As estações influenciam o cotidiano e as tradições culturais.
+        </p>
+    </div>
+
+    <div class="questions">
+        <h3>Perguntas de Compreensão</h3>
+
+        <p>1. Qual é a estação mais quente no Brasil?</p>
+        <input type="radio" name="q1" value="a"> Outono<br>
+        <input type="radio" name="q1" value="b"> Inverno<br>
+        <input type="radio" name="q1" value="c"> Verão<br>
+
+        <p>2. O que acontece no outono?</p>
+        <input type="radio" name="q2" value="a"> As folhas caem das árvores<br>
+        <input type="radio" name="q2" value="b"> Começa a nevar<br>
+        <input type="radio" name="q2" value="c"> As praias ficam cheias<br>
+
+        <p>3. Onde pode nevar no Brasil?</p>
+        <input type="radio" name="q3" value="a"> No norte<br>
+        <input type="radio" name="q3" value="b"> No sul<br>
+        <input type="radio" name="q3" value="c"> No litoral<br>
+
+        <p>4. Qual estação é conhecida pelas flores?</p>
+        <input type="radio" name="q4" value="a"> Verão<br>
+        <input type="radio" name="q4" value="b"> Primavera<br>
+        <input type="radio" name="q4" value="c"> Outono<br>
+
+        <p>5. Qual festa é popular no inverno?</p>
+        <input type="radio" name="q5" value="a"> Carnaval<br>
+        <input type="radio" name="q5" value="b"> Festa Junina<br>
+        <input type="radio" name="q5" value="c"> Ano Novo<br>
+
+        <button onclick="checkAnswers()">Enviar Respostas</button>
+        <p id="result"></p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function addNote() {
+    let noteText = prompt("Digite sua nota:");
+    if (noteText) {
+        let listItem = document.createElement('li');
+        listItem.textContent = noteText;
+        document.getElementById('notesList').appendChild(listItem);
+    }
+}
+
+function checkAnswers() {
+    let correctAnswers = ["c", "a", "b", "b", "b"];
+    let score = 0;
+    for (let i = 1; i <= 5; i++) {
+        let answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer && answer.value === correctAnswers[i - 1]) {
+            score++;
+        }
+    }
+    document.getElementById('result').textContent = `Respostas corretas: ${score} / 5`;
+}
+    </script>
+</body>
+</html>

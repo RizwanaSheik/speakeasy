@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2 style="color: white;">Welcome<br>Create an account</h2>
+
+        
+        <img src="login.png" class="login-img"> 
+        
+        <form id="signupForm">
+            <input type="text" id="username" placeholder="Enter your name" required>
+            <input type="email" id="email" placeholder="Enter your email id" required>
+            <input type="password" id="password" placeholder="Create Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <p>Already have an account? <a href="login.html">Log In</a></p>
+    </div>
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            
+            // Simulating account creation
+            localStorage.setItem("user", JSON.stringify({ username, email, password }));
+            alert("Signup successful!");
+            window.location.href = "home.html"; // Redirect to home page
+        });
+    </script>
+</body>
+</html>

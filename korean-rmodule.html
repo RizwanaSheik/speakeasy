@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>독해 보조 도구</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="settings">
+        <label>글자 크기: <input type="range" id="fontSize" min="14" max="24" value="16"></label>
+        <label>글 간격: <input type="range" id="textSpacing" min="1" max="5" value="1.5"></label>
+        <label>배경 색상: 
+            <select id="bgColor">
+                <option value="white">흰색</option>
+                <option value="lightgray">연회색</option>
+                <option value="beige">베이지색</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="content">
+        <h2>어린 시절의 추억</h2>
+        <p id="text">
+            내가 어렸을 때, 우리 가족은 작은 마을에서 살았다. 마을은 푸른 산과 맑은 강으로 둘러싸여 있었고, 우리는 자연 속에서 많은 시간을 보냈다. 아침이면 새들의 지저귐 소리에 눈을 떴고, 집 앞의 작은 연못에서 개구리들이 뛰어노는 모습을 보며 하루를 시작했다.
+        </p>
+        <p>
+            학교까지의 거리는 멀었지만, 친구들과 함께 길을 걸으며 노래를 부르고 이야기를 나누는 것이 즐거웠다. 선생님은 엄격하면서도 따뜻한 분이셨고, 우리는 수업이 끝난 후에도 선생님이 들려주시는 옛날 이야기를 듣는 것을 좋아했다.
+        </p>
+        <p>
+            어느 날, 우리는 숲속에서 작은 동굴을 발견했다. 그 안에는 오래된 벽화가 그려져 있었고, 우리는 마치 고대의 보물을 발견한 듯한 기분이 들었다. 그날 이후로 우리는 그곳을 비밀 기지로 삼고, 매일 새로운 모험을 떠나는 상상을 하곤 했다. 
+        </p>
+        <button onclick="addNote()">메모 추가</button>
+    </div>
+
+    <div class="notes-section">
+        <h3>메모</h3>
+        <ul id="notesList"></ul>
+    </div>
+
+    <div class="summary">
+        <h3>요약</h3>
+        <p>
+            이 글은 한 사람의 어린 시절 추억을 이야기한다. 작은 마을에서 자연과 함께 성장한 경험, 학교에서의 즐거운 시간, 그리고 친구들과 발견한 신비로운 동굴에 대한 이야기가 담겨 있다.
+        </p>
+    </div>
+
+    <div class="questions">
+        <h3>이해력 문제</h3>
+
+        <p>1. 주인공이 살던 마을은 어떤 곳이었나요?</p>
+        <input type="radio" name="q1" value="a"> 대도시<br>
+        <input type="radio" name="q1" value="b"> 작은 마을<br>
+        <input type="radio" name="q1" value="c"> 해변가<br>
+
+        <p>2. 학교까지 어떻게 갔나요?</p>
+        <input type="radio" name="q2" value="a"> 자전거<br>
+        <input type="radio" name="q2" value="b"> 걸어서<br>
+        <input type="radio" name="q2" value="c"> 버스<br>
+
+        <p>3. 숲에서 발견한 것은 무엇이었나요?</p>
+        <input type="radio" name="q3" value="a"> 오래된 나무<br>
+        <input type="radio" name="q3" value="b"> 작은 동굴<br>
+        <input type="radio" name="q3" value="c"> 강가의 다리<br>
+
+        <p>4. 동굴 안에서 무엇을 발견했나요?</p>
+        <input type="radio" name="q4" value="a"> 벽화<br>
+        <input type="radio" name="q4" value="b"> 금화<br>
+        <input type="radio" name="q4" value="c"> 오래된 책<br>
+
+        <p>5. 주인공과 친구들은 동굴을 어떻게 생각했나요?</p>
+        <input type="radio" name="q5" value="a"> 무서운 장소<br>
+        <input type="radio" name="q5" value="b"> 비밀 기지<br>
+        <input type="radio" name="q5" value="c"> 위험한 곳<br>
+
+        <button onclick="checkAnswers()">정답 확인</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        function addNote() {
+    let noteText = prompt("메모를 추가하세요:");
+    if (noteText) {
+        let listItem = document.createElement('li');
+        listItem.textContent = noteText;
+        document.getElementById('notesList').appendChild(listItem);
+    }
+}
+
+function checkAnswers() {
+    let correctAnswers = ["b", "b", "b", "a", "b"];
+    let score = 0;
+    for (let i = 1; i <= 5; i++) {
+        let answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer && answer.value === correctAnswers[i - 1]) {
+            score++;
+        }
+    }
+    document.getElementById('result').textContent = `정답 ${score}/5 개 맞추셨습니다.`;
+}
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

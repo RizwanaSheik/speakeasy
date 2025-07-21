@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strumento di Comprensione della Lettura</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="settings">
+        <label>Dimensione del testo: <input type="range" id="fontSize" min="14" max="24" value="16"></label>
+        <label>Spaziatura del testo: <input type="range" id="textSpacing" min="1" max="5" value="1.5"></label>
+        <label>Colore di sfondo: 
+            <select id="bgColor">
+                <option value="white">Bianco</option>
+                <option value="lightgray">Grigio chiaro</option>
+                <option value="beige">Beige</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="content">
+        <h2>Un Ricordo d'Infanzia</h2>
+        <p id="text">
+            Da bambino, trascorrevo le estati nel piccolo paese dei miei nonni. Le mattine iniziavano presto con il canto dei galli e il profumo del pane appena sfornato. Mi piaceva correre nei campi di grano, raccogliere frutti dagli alberi ed esplorare gli angoli nascosti del bosco vicino.
+        </p>
+        <p>
+            Mio nonno mi insegnò a pescare nel fiume che scorreva vicino alla casa. Passavamo ore insieme, aspettando con pazienza che i pesci abboccassero. Le serate erano magiche: ci sedevamo attorno a un falò mentre mia nonna raccontava storie della sua giovinezza.
+        </p>
+        <p>
+            Un pomeriggio, mentre esploravo il bosco con i miei amici, trovammo una capanna abbandonata. La porta era socchiusa e, con cautela, entrammo. Dentro c'erano vecchi mobili coperti di polvere e foto antiche appese al muro. Ci chiedevamo chi avesse vissuto lì e quali storie nascondesse quel luogo misterioso.
+        </p>
+        <button onclick="addNote()">Aggiungi Nota</button>
+    </div>
+
+    <div class="notes-section">
+        <h3>Note</h3>
+        <ul id="notesList"></ul>
+    </div>
+
+    <div class="summary">
+        <h3>Riassunto</h3>
+        <p>
+            Questo testo racconta i ricordi d'infanzia dell'autore nel paese dei suoi nonni. Gli piaceva stare nella natura, imparare a pescare con suo nonno e ascoltare le storie di sua nonna. Un giorno, esplorando il bosco con gli amici, scoprirono una capanna abbandonata, suscitando la loro curiosità.
+        </p>
+    </div>
+
+    <div class="questions">
+        <h3>Domande di Comprensione</h3>
+
+        <p>1. Dove trascorreva l'autore le estati?</p>
+        <input type="radio" name="q1" value="a"> In città<br>
+        <input type="radio" name="q1" value="b"> Nel paese dei suoi nonni<br>
+        <input type="radio" name="q1" value="c"> Al mare<br>
+
+        <p>2. Cosa gli piaceva fare in campagna?</p>
+        <input type="radio" name="q2" value="a"> Giocare ai videogiochi<br>
+        <input type="radio" name="q2" value="b"> Correre nei campi e raccogliere frutti<br>
+        <input type="radio" name="q2" value="c"> Guardare la televisione<br>
+
+        <p>3. Chi gli insegnò a pescare?</p>
+        <input type="radio" name="q3" value="a"> Suo zio<br>
+        <input type="radio" name="q3" value="b"> Suo nonno<br>
+        <input type="radio" name="q3" value="c"> Suo padre<br>
+
+        <p>4. Cosa faceva l'autore di sera con sua nonna?</p>
+        <input type="radio" name="q4" value="a"> Giocava a carte<br>
+        <input type="radio" name="q4" value="b"> Ascoltava storie attorno a un falò<br>
+        <input type="radio" name="q4" value="c"> Leggeva libri<br>
+
+        <p>5. Cosa trovarono l'autore e i suoi amici nel bosco?</p>
+        <input type="radio" name="q5" value="a"> Un lago nascosto<br>
+        <input type="radio" name="q5" value="b"> Una capanna abbandonata<br>
+        <input type="radio" name="q5" value="c"> Un albero gigantesco<br>
+
+        <button onclick="checkAnswers()">Invia Risposte</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        function addNote() {
+    let noteText = prompt("Scrivi la tua nota:");
+    if (noteText) {
+        let listItem = document.createElement('li');
+        listItem.textContent = noteText;
+        document.getElementById('notesList').appendChild(listItem);
+    }
+}
+
+function checkAnswers() {
+    let correctAnswers = ["b", "b", "b", "b", "b"];
+    let score = 0;
+    for (let i = 1; i <= 5; i++) {
+        let answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer && answer.value === correctAnswers[i - 1]) {
+            score++;
+        }
+    }
+    document.getElementById('result').textContent = `Hai risposto correttamente a ${score} su 5 domande.`;
+}
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leseverständnis-Hilfe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="settings">
+        <label>Schriftgröße: <input type="range" id="fontSize" min="14" max="24" value="16"></label>
+        <label>Zeilenabstand: <input type="range" id="textSpacing" min="1" max="5" value="1.5"></label>
+        <label>Hintergrundfarbe: 
+            <select id="bgColor">
+                <option value="white">Weiß</option>
+                <option value="lightgray">Hellgrau</option>
+                <option value="beige">Beige</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="content">
+        <h2>Personenbeschreibungen</h2>
+        <p id="text">
+            Martin Stubbe ist 15 Jahre alt. Er lebt mit seinen Eltern und seiner Schwester in Berlin. Sie wohnen in einer großen Wohnung im Zentrum. Martins Vater ist Arzt. Seine Mutter ist Krankenschwester. Martin lernt Mathe und Biologie gern. Er spielt Fußball. Seine Schwester ist 17 Jahre alt. Sie lernt Englisch gern und spielt Tennis.
+        </p>
+        <p>
+            Leonie Klein ist 21 Jahre alt. Sie kommt aus Frankfurt am Main. Sie studiert Betriebswirtschaft an der Ludwig-Maximilians-Universität in München. Sie wohnt mit ihren beiden Freundinnen in einer kleinen Wohnung in Garching. Leonie arbeitet jeden Samstag in einem Restaurant als Kellnerin. Die drei Studentinnen lieben das Nachtleben in München und die vielen Partys.
+        </p>
+        <p>
+            Christian Hart ist 28 Jahre alt. Er ist Logistiker von Beruf. Er arbeitet bei Mercedes in Stuttgart. Er wohnt nicht in Stuttgart. Er lebt mit seiner Frau und seinen zwei Kindern in Kirchheim unter Teck. Sie wohnen in einem Einfamilienhaus. Seine Frau ist 26 Jahre alt. Sie ist Germanistin von Beruf. Sie arbeitet an der Pädagogischen Hochschule in Ludwigsburg. An den Wochenenden macht Familie Hart Ausflüge.
+        </p>
+        <button onclick="addNote()">Notiz hinzufügen</button>
+    </div>
+
+    <div class="notes-section">
+        <h3>Notizen</h3>
+        <ul id="notesList"></ul>
+    </div>
+
+    <div class="summary">
+        <h3>Zusammenfassung</h3>
+        <p>
+            Der Text beschreibt drei Personen: Martin, Leonie und Christian. Martin ist Schüler in Berlin. Leonie ist eine Studentin in München, die in einem Restaurant arbeitet. Christian ist Logistiker und lebt mit seiner Familie in Kirchheim unter Teck.
+        </p>
+    </div>
+
+    <div class="questions">
+        <h3>Leseverständnis-Fragen</h3>
+
+        <p>1. Wie alt ist Martin?</p>
+        <input type="radio" name="q1" value="a"> 12 Jahre<br>
+        <input type="radio" name="q1" value="b"> 15 Jahre<br>
+        <input type="radio" name="q1" value="c"> 17 Jahre<br>
+
+        <p>2. Wo lebt Martin?</p>
+        <input type="radio" name="q2" value="a"> In München<br>
+        <input type="radio" name="q2" value="b"> In Berlin<br>
+        <input type="radio" name="q2" value="c"> In Stuttgart<br>
+
+        <p>3. Was studiert Leonie?</p>
+        <input type="radio" name="q3" value="a"> Medizin<br>
+        <input type="radio" name="q3" value="b"> Betriebswirtschaft<br>
+        <input type="radio" name="q3" value="c"> Germanistik<br>
+
+        <p>4. Wo arbeitet Leonie?</p>
+        <input type="radio" name="q4" value="a"> In einer Bank<br>
+        <input type="radio" name="q4" value="b"> In einem Restaurant<br>
+        <input type="radio" name="q4" value="c"> In einer Schule<br>
+
+        <p>5. Wie viele Freundinnen hat Leonie in ihrer Wohnung?</p>
+        <input type="radio" name="q5" value="a"> Eine<br>
+        <input type="radio" name="q5" value="b"> Zwei<br>
+        <input type="radio" name="q5" value="c"> Drei<br>
+
+        <p>6. Was ist der Beruf von Christian?</p>
+        <input type="radio" name="q6" value="a"> Lehrer<br>
+        <input type="radio" name="q6" value="b"> Logistiker<br>
+        <input type="radio" name="q6" value="c"> Arzt<br>
+
+        <p>7. Wo arbeitet Christian?</p>
+        <input type="radio" name="q7" value="a"> Bei BMW<br>
+        <input type="radio" name="q7" value="b"> Bei Mercedes<br>
+        <input type="radio" name="q7" value="c"> Bei Audi<br>
+
+        <p>8. Wo lebt Christian mit seiner Familie?</p>
+        <input type="radio" name="q8" value="a"> In Stuttgart<br>
+        <input type="radio" name="q8" value="b"> In Kirchheim unter Teck<br>
+        <input type="radio" name="q8" value="c"> In Ludwigsburg<br>
+
+        <button onclick="checkAnswers()">Antworten überprüfen</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        function addNote() {
+    let noteText = prompt("Geben Sie Ihre Notiz ein:");
+    if (noteText) {
+        let listItem = document.createElement('li');
+        listItem.textContent = noteText;
+        document.getElementById('notesList').appendChild(listItem);
+    }
+}
+
+function checkAnswers() {
+    let correctAnswers = ["b", "b", "b", "b", "b", "b", "b", "b"];
+    let score = 0;
+    for (let i = 1; i <= 8; i++) {
+        let answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer && answer.value === correctAnswers[i - 1]) {
+            score++;
+        }
+    }
+    document.getElementById('result').textContent = `Sie haben ${score}/8 richtig`;
+}
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

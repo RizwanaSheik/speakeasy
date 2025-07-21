@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أداة فهم القراءة</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body dir="rtl">
+    <div class="settings">
+        <label>حجم الخط: <input type="range" id="fontSize" min="14" max="24" value="16"></label>
+        <label>تباعد النص: <input type="range" id="textSpacing" min="1" max="5" value="1.5"></label>
+        <label>لون الخلفية: 
+            <select id="bgColor">
+                <option value="white">أبيض</option>
+                <option value="lightgray">رمادي فاتح</option>
+                <option value="beige">بيج</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="content">
+        <h2>ذكريات الطفولة</h2>
+        <p id="text">
+            عندما كنت طفلاً، كنت أعيش في قرية صغيرة محاطة بالجبال الخضراء والأنهار الصافية. كنت أستيقظ كل صباح على زقزقة العصافير، وأقضي يومي في اللعب مع الأصدقاء في الحقول والمروج. كانت الحياة بسيطة ومليئة بالفرح.
+        </p>
+        <p>
+            كان الذهاب إلى المدرسة رحلة ممتعة، حيث كنا نمشي معًا ونتبادل القصص والنكات. كان المعلم صارمًا لكنه كان يعاملنا كأبنائه، وكان يحكي لنا الحكايات بعد انتهاء الدروس، مما جعلنا نتعلق به أكثر.
+        </p>
+        <p>
+            في أحد الأيام، اكتشفنا كهفًا صغيرًا في الغابة. وجدنا بداخله نقوشًا قديمة، وكأنها تحكي قصصًا من زمن بعيد. شعرنا كأننا مستكشفون، وأصبح ذلك المكان ملاذنا السري حيث نقضي أوقات المغامرات والخيال.
+        </p>
+        <button onclick="addNote()">إضافة ملاحظة</button>
+    </div>
+
+    <div class="notes-section">
+        <h3>الملاحظات</h3>
+        <ul id="notesList"></ul>
+    </div>
+
+    <div class="summary">
+        <h3>ملخص</h3>
+        <p>
+            تتحدث هذه القصة عن ذكريات الطفولة في قرية صغيرة مليئة بالطبيعة والجمال. يصف الكاتب كيف كان الذهاب إلى المدرسة ممتعًا، وكيف اكتشف مع أصدقائه كهفًا غامضًا في الغابة، مما أثار فيهم روح المغامرة والاكتشاف.
+        </p>
+    </div>
+
+    <div class="questions">
+        <h3>أسئلة الفهم</h3>
+
+        <p>1. كيف كانت القرية التي عاش فيها الكاتب؟</p>
+        <input type="radio" name="q1" value="a"> مدينة كبيرة<br>
+        <input type="radio" name="q1" value="b"> قرية صغيرة<br>
+        <input type="radio" name="q1" value="c"> منطقة ساحلية<br>
+
+        <p>2. كيف كان الكاتب يذهب إلى المدرسة؟</p>
+        <input type="radio" name="q2" value="a"> بالدراجة<br>
+        <input type="radio" name="q2" value="b"> سيرًا على الأقدام<br>
+        <input type="radio" name="q2" value="c"> بالحافلة<br>
+
+        <p>3. ماذا اكتشف الكاتب وأصدقاؤه في الغابة؟</p>
+        <input type="radio" name="q3" value="a"> شجرة ضخمة<br>
+        <input type="radio" name="q3" value="b"> كهف قديم<br>
+        <input type="radio" name="q3" value="c"> بحيرة جميلة<br>
+
+        <p>4. ماذا وجدوا داخل الكهف؟</p>
+        <input type="radio" name="q4" value="a"> نقوش قديمة<br>
+        <input type="radio" name="q4" value="b"> كنز ذهبي<br>
+        <input type="radio" name="q4" value="c"> كتاب تاريخي<br>
+
+        <p>5. كيف شعر الكاتب وأصدقاؤه عندما اكتشفوا الكهف؟</p>
+        <input type="radio" name="q5" value="a"> بالخوف<br>
+        <input type="radio" name="q5" value="b"> بالحماس والمغامرة<br>
+        <input type="radio" name="q5" value="c"> بالملل<br>
+
+        <button onclick="checkAnswers()">تحقق من الإجابات</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        function addNote() {
+    let noteText = prompt("أضف ملاحظة:");
+    if (noteText) {
+        let listItem = document.createElement('li');
+        listItem.textContent = noteText;
+        document.getElementById('notesList').appendChild(listItem);
+    }
+}
+
+function checkAnswers() {
+    let correctAnswers = ["b", "b", "b", "a", "b"];
+    let score = 0;
+    for (let i = 1; i <= 5; i++) {
+        let answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer && answer.value === correctAnswers[i - 1]) {
+            score++;
+        }
+    }
+    document.getElementById('result').textContent = `لقد أجبت بشكل صحيح على ${score} من 5 أسئلة.`;
+}
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aide à la Compréhension</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="settings">
+        <label>Taille de police: <input type="range" id="fontSize" min="14" max="24" value="16"></label>
+        <label>Espacement du texte: <input type="range" id="textSpacing" min="1" max="5" value="1.5"></label>
+        <label>Couleur de fond: 
+            <select id="bgColor">
+                <option value="white">Blanc</option>
+                <option value="lightgray">Gris clair</option>
+                <option value="beige">Beige</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="content">
+        <h2>Un souvenir d'enfance</h2>
+        <p id="text">
+            Quand j'étais enfant, j'habitais un petit village entouré de collines verdoyantes. Chaque matin, je me réveillais au chant des oiseaux et au doux bruit de la rivière qui coulait près de notre maison. L'école était située à quelques kilomètres, et nous y allions à pied avec mes amis, en traversant les champs de blé doré.
+        </p>
+        <p>
+            Mon instituteur était un homme gentil mais strict. Il nous apprenait non seulement à lire et écrire, mais aussi à respecter la nature et les traditions de notre région. Après l'école, nous passions des heures à jouer dans les bois, à construire des cabanes et à inventer des histoires fantastiques.
+        </p>
+        <p>
+            Un jour, nous avons découvert une grotte cachée derrière une cascade. C'était un endroit mystérieux, rempli de dessins anciens gravés sur les parois. Nous avons imaginé que c'était un repaire secret de pirates ou un passage vers un autre monde. Ces moments d'enfance restent gravés dans ma mémoire comme les plus beaux souvenirs de ma vie.
+        </p>
+        <button onclick="addNote()">Ajouter une note</button>
+    </div>
+
+    <div class="notes-section">
+        <h3>Notes</h3>
+        <ul id="notesList"></ul>
+    </div>
+
+    <div class="summary">
+        <h3>Résumé</h3>
+        <p>
+            Ce texte raconte les souvenirs d’enfance d’un narrateur vivant dans un petit village. Il évoque ses journées à l'école, ses jeux dans la nature et une découverte fascinante d'une grotte secrète derrière une cascade.
+        </p>
+    </div>
+
+    <div class="questions">
+        <h3>Questions de Compréhension</h3>
+
+        <p>1. Où habitait l'enfant ?</p>
+        <input type="radio" name="q1" value="a"> Dans une grande ville<br>
+        <input type="radio" name="q1" value="b"> Dans un petit village<br>
+        <input type="radio" name="q1" value="c"> Sur une île<br>
+
+        <p>2. Comment allait-il à l'école ?</p>
+        <input type="radio" name="q2" value="a"> En voiture<br>
+        <input type="radio" name="q2" value="b"> En bus<br>
+        <input type="radio" name="q2" value="c"> À pied<br>
+
+        <p>3. Que faisait-il après l'école ?</p>
+        <input type="radio" name="q3" value="a"> Il jouait dans les bois<br>
+        <input type="radio" name="q3" value="b"> Il regardait la télévision<br>
+        <input type="radio" name="q3" value="c"> Il rentrait directement chez lui<br>
+
+        <p>4. Que se trouvait derrière la cascade ?</p>
+        <input type="radio" name="q4" value="a"> Un trésor<br>
+        <input type="radio" name="q4" value="b"> Une grotte secrète<br>
+        <input type="radio" name="q4" value="c"> Un château abandonné<br>
+
+        <p>5. À quoi ont-ils comparé la grotte ?</p>
+        <input type="radio" name="q5" value="a"> Une maison de sorcière<br>
+        <input type="radio" name="q5" value="b"> Un repaire de pirates<br>
+        <input type="radio" name="q5" value="c"> Une école secrète<br>
+
+        <button onclick="checkAnswers()">Vérifier les réponses</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        function addNote() {
+    let noteText = prompt("Ajoutez votre note :");
+    if (noteText) {
+        let listItem = document.createElement('li');
+        listItem.textContent = noteText;
+        document.getElementById('notesList').appendChild(listItem);
+    }
+}
+
+function checkAnswers() {
+    let correctAnswers = ["b", "c", "a", "b", "b"];
+    let score = 0;
+    for (let i = 1; i <= 5; i++) {
+        let answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer && answer.value === correctAnswers[i - 1]) {
+            score++;
+        }
+    }
+    document.getElementById('result').textContent = `Vous avez ${score}/5 réponses correctes.`;
+}
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

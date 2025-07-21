@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инструмент для понимания текста</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="settings">
+        <label>Размер шрифта: <input type="range" id="fontSize" min="14" max="24" value="16"></label>
+        <label>Межстрочный интервал: <input type="range" id="textSpacing" min="1" max="5" value="1.5"></label>
+        <label>Цвет фона: 
+            <select id="bgColor">
+                <option value="white">Белый</option>
+                <option value="lightgray">Серый</option>
+                <option value="beige">Бежевый</option>
+            </select>
+        </label>
+    </div><div class="content">
+    <h2>Времена года в России</h2>
+    <p id="text">
+        Россия — страна с ярко выраженными временами года. Весной природа пробуждается, тает снег, появляются первые цветы, а деревья покрываются зеленью. Это время года часто сопровождается дождями, что помогает природе ожить после зимних холодов. Люди начинают проводить больше времени на улице, гуляя в парках и наслаждаясь свежим воздухом.<br>
+        Лето в России бывает жарким, особенно в южных регионах. Многие люди отправляются на отдых к морю или на дачу, где наслаждаются теплой погодой. В это время популярны походы, пикники и различные летние фестивали. Дни становятся длиннее, а ночи короче, что позволяет больше времени проводить на свежем воздухе.<br>
+        Осень приносит прохладу и яркие краски. Деревья окрашиваются в золотистые и красные оттенки, а температура постепенно снижается. В это время начинается сбор урожая, особенно яблок, картофеля и зерновых культур. Осень также знаменуется началом учебного года и подготовкой к зиме.<br>
+        Зима в России бывает суровой, особенно в Сибири и на севере страны. Температура может опускаться до -30°C и ниже, а снег покрывает землю на несколько месяцев. Люди катаются на лыжах, коньках, строят снежные крепости и лепят снеговиков. Зимой отмечается один из главных праздников — Новый год, который сопровождается украшением елок, семейными застольями и праздничными гуляниями.
+    </p>
+    <button onclick="addNote()">Добавить заметку</button>
+</div>
+
+<div class="notes-section">
+    <h3>Заметки</h3>
+    <ul id="notesList"></ul>
+</div>
+
+<div class="summary">
+    <h3>Краткое содержание</h3>
+    <p>
+        В России четыре сезона: весной природа оживает, летом тепло и люди отдыхают, осенью собирают урожай, а зимой холодно и отмечают Новый год.
+    </p>
+</div>
+
+<div class="questions">
+    <h3>Вопросы по тексту</h3>
+
+    <p>1. Что происходит весной в России?</p>
+    <input type="radio" name="q1" value="a"> Стоит сильная жара<br>
+    <input type="radio" name="q1" value="b"> Природа пробуждается, тает снег<br>
+    <input type="radio" name="q1" value="c"> Всегда идет снег<br>
+
+    <p>2. Чем люди занимаются летом?</p>
+    <input type="radio" name="q2" value="a"> Отдыхают у моря или на даче<br>
+    <input type="radio" name="q2" value="b"> Сажают деревья<br>
+    <input type="radio" name="q2" value="c"> Строят снеговиков<br>
+
+    <p>3. Что характерно для осени?</p>
+    <input type="radio" name="q3" value="a"> Урожай и красочные листья<br>
+    <input type="radio" name="q3" value="b"> Сильные морозы<br>
+    <input type="radio" name="q3" value="c"> Долгие жаркие дни<br>
+
+    <p>4. Какой климат зимой в России?</p>
+    <input type="radio" name="q4" value="a"> Очень теплый<br>
+    <input type="radio" name="q4" value="b"> Холодный, много снега<br>
+    <input type="radio" name="q4" value="c"> Дождливый и влажный<br>
+
+    <p>5. Какой главный праздник зимой?</p>
+    <input type="radio" name="q5" value="a"> Масленица<br>
+    <input type="radio" name="q5" value="b"> Новый год<br>
+    <input type="radio" name="q5" value="c"> День знаний<br>
+
+    <button onclick="checkAnswers()">Отправить ответы</button>
+    <p id="result"></p>
+</div>
+
+<script src="script.js"></script>
+<script>
+    function addNote() {
+        let noteText = prompt("Введите вашу заметку:");
+        if (noteText) {
+            let listItem = document.createElement('li');
+            listItem.textContent = noteText;
+            document.getElementById('notesList').appendChild(listItem);
+        }
+    }
+
+    function checkAnswers() {
+        let correctAnswers = ["b", "a", "a", "b", "b"];
+        let score = 0;
+        for (let i = 1; i <= 5; i++) {
+            let answer = document.querySelector(input[name="q${i}"]:checked);
+            if (answer && answer.value === correctAnswers[i - 1]) {
+                score++;
+            }
+        }
+        document.getElementById('result').textContent = Правильных ответов: ${score} / 5;
+    }
+</script>
+
+</body>
+</html>

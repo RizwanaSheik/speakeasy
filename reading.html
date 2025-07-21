@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Mode</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Reading Mode</h1>
+    <p>Welcome to the Reading section!</p>
+    <a href="home.html">Back to Home</a>
+</body>
+<p>Select a language to start learning:</p>
+
+<div class="module-container">
+    <div class="module" onclick="openModule('English')">
+        <img src="english.png" alt="English">
+        <p>English</p>
+    </div>
+    <div class="module" onclick="openModule('Spanish')">
+        <img src="spanish.png" alt="Spanish">
+        <p>Spanish</p>
+    </div>
+    <div class="module" onclick="openModule('French')">
+        <img src="french.png" alt="French">
+        <p>French</p>
+    </div>
+    <div class="module" onclick="openModule('German')">
+        <img src="german.png" alt="German">
+        <p>German</p>
+    </div>
+    <div class="module" onclick="openModule('Italian')">
+        <img src="italian.png" alt="Italian">
+        <p>Italian</p>
+    </div>
+    <div class="module" onclick="openModule('Japanese')">
+        <img src="japanese.png" alt="Japanese">
+        <p>Japanese</p>
+    </div>
+    <div class="module" onclick="openModule('Chinese')">
+        <img src="chinese.png" alt="Chinese">
+        <p>Chinese</p>
+    </div>
+    <div class="module" onclick="openModule('Hindi')">
+        <img src="hindi.png" alt="Hindi">
+        <p>Hindi</p>
+    </div>
+    <div class="module" onclick="openModule('Arabic')">
+        <img src="arabic.png" alt="Arabic">
+        <p>Arabic</p>
+    </div>
+    <div class="module" onclick="openModule('Russian')">
+        <img src="russian.png" alt="Russian">
+        <p>Russian</p>
+    </div>
+    <div class="module" onclick="openModule('Portuguese')">
+        <img src="portugues.png" alt="Portuguese">
+        <p>Portuguese</p>
+    </div>
+    <div class="module" onclick="openModule('Korean')">
+        <img src="korean.png" alt="Korean">
+        <p>Korean</p>
+    </div>
+</div>
+
+<a href="home.html">Back to Home</a>
+
+<script src="script.js"></script>
+
+<script>
+    function openModule(language) {
+        const pages = {
+            'English': 'english-rmodule.html',
+            'Spanish': 'spanish-rmodule.html',
+            'French': 'french-rmodule.html',
+            'German': 'german-rmodule.html',
+            'Italian': 'italian-rmodule.html',
+            'Japanese': 'japanese-rmodule.html',
+            'Chinese': 'chinese-rmodule.html',
+            'Hindi': 'hindi-rmodule.html',
+            'Arabic': 'arabic-rmodule.html',
+            'Russian': 'russian-rmodule.html',
+            'Portuguese': 'portuguese-rmodule.html',
+            'Korean': 'korean-rmodule.html'
+        };
+        
+        if (pages[language]) {
+            window.location.href = pages[language];
+        }
+    }
+</script>
+</body>
+</body>
+</html>

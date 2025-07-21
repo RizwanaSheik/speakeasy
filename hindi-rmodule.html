@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>पाठ समझ सहायता</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="settings">
+        <label>फॉण्ट आकार: <input type="range" id="fontSize" min="14" max="24" value="16"></label>
+        <label>पंक्ति अंतराल: <input type="range" id="textSpacing" min="1" max="5" value="1.5"></label>
+        <label>पृष्ठभूमि रंग: 
+            <select id="bgColor">
+                <option value="white">सफेद</option>
+                <option value="lightgray">हल्का ग्रे</option>
+                <option value="beige">बेज</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="content">
+        <h2>बचपन की यादें</h2>
+        <p id="text">
+            बचपन का वह मिशन स्कूल मुझे अब तक स्मरण है, जहाँ प्रार्थना और पाठ्यक्रम की एकरसता से मैं इतनी रुआँसी हो जाती थी कि प्रतिदिन घर लौटकर नींद से बेसुध होने तक सबेरे स्कूल न जाने का बहाना सोचने से ही अवकाश न मिलता था।
+        </p>
+        <p>
+            उन दिनों मेरी ईर्ष्या का मुख्य विषय नौकरानी की लड़की थी, जिसे चौका-बर्तन करके घर में रहने को तो मिल जाता था। जिस कठोर ईश्वर ने मेरे भाग्य में नित्य स्कूल जाना लिख दिया था, वह माँ के ठाकुर जी में से कोई है या मिशन की सिस्टर का ईसू, यह निश्चय न कर सकने के कारण मेरा मन विचित्र दुविधा में पड़ा रहता था।
+        </p>
+        <p>
+            इस अन्धकार में प्रकाश की एक रेखा भी थी। स्कूल निकट होने के कारण बूढ़ी कल्लू की माँ मुझे किताबों के साथ वहाँ पहुँचा भी आती थी और ले भी आती थी। इस आवागमन के बीच में, कभी सड़क पर लड़ते हुए कुत्ते, कभी बिल्ली, कभी बत्तख और तीतर, कभी बंदर और नाचने वाला रीछ स्कूल की एकरसता दूर करते रहते थे।
+        </p>
+        <button onclick="addNote()">नोट जोड़ें</button>
+    </div>
+
+    <div class="notes-section">
+        <h3>नोट्स</h3>
+        <ul id="notesList"></ul>
+    </div>
+
+    <div class="summary">
+        <h3>सारांश</h3>
+        <p>
+            यह पाठ एक लड़की की बचपन की यादों को दर्शाता है। स्कूल जाने की मजबूरी से वह दुखी थी, लेकिन रास्ते में देखे गए जीव-जंतुओं और घटनाओं से उसे कुछ राहत मिलती थी। वह स्कूल और घर की पूजा में उलझन महसूस करती थी।
+        </p>
+    </div>
+
+    <div class="questions">
+        <h3>पढ़ाई समझने के प्रश्न</h3>
+
+        <p>1. लड़की स्कूल क्यों नहीं जाना चाहती थी?</p>
+        <input type="radio" name="q1" value="a"> स्कूल बहुत दूर था<br>
+        <input type="radio" name="q1" value="b"> पाठ्यक्रम उबाऊ था<br>
+        <input type="radio" name="q1" value="c"> स्कूल में शिक्षक बहुत सख्त थे<br>
+
+        <p>2. लड़की को ईर्ष्या किससे थी?</p>
+        <input type="radio" name="q2" value="a"> अपनी सहेली से<br>
+        <input type="radio" name="q2" value="b"> नौकरानी की लड़की से<br>
+        <input type="radio" name="q2" value="c"> स्कूल की प्रधानाध्यापिका से<br>
+
+        <p>3. लड़की के मन में क्या दुविधा थी?</p>
+        <input type="radio" name="q3" value="a"> वह मिशन स्कूल छोड़ना चाहती थी<br>
+        <input type="radio" name="q3" value="b"> ईश्वर कौन है, इसे लेकर<br>
+        <input type="radio" name="q3" value="c"> उसे किस विषय में पढ़ाई करनी चाहिए<br>
+
+        <p>4. कौन उसे स्कूल छोड़ने और लाने का काम करता था?</p>
+        <input type="radio" name="q4" value="a"> उसकी माँ<br>
+        <input type="radio" name="q4" value="b"> बूढ़ी कल्लू की माँ<br>
+        <input type="radio" name="q4" value="c"> उसका भाई<br>
+
+        <p>5. लड़की स्कूल के रास्ते में क्या देखती थी?</p>
+        <input type="radio" name="q5" value="a"> लड़ते हुए कुत्ते<br>
+        <input type="radio" name="q5" value="b"> बत्तख और तीतर<br>
+        <input type="radio" name="q5" value="c"> उपरोक्त सभी<br>
+
+        <button onclick="checkAnswers()">उत्तर जाँचें</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        function addNote() {
+    let noteText = prompt("अपनी नोट लिखें:");
+    if (noteText) {
+        let listItem = document.createElement('li');
+        listItem.textContent = noteText;
+        document.getElementById('notesList').appendChild(listItem);
+    }
+}
+
+function checkAnswers() {
+    let correctAnswers = ["b", "b", "b", "b", "c"];
+    let score = 0;
+    for (let i = 1; i <= 5; i++) {
+        let answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer && answer.value === correctAnswers[i - 1]) {
+            score++;
+        }
+    }
+    document.getElementById('result').textContent = `आपने ${score}/5 सही उत्तर दिए हैं`;
+}
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

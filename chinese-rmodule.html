@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阅读理解工具</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="settings">
+        <label>字体大小: <input type="range" id="fontSize" min="14" max="24" value="16"></label>
+        <label>行距: <input type="range" id="textSpacing" min="1" max="5" value="1.5"></label>
+        <label>背景颜色: 
+            <select id="bgColor">
+                <option value="white">白色</option>
+                <option value="lightgray">灰色</option>
+                <option value="beige">米色</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="content">
+        <h2>中国的四季</h2>
+        <p id="text">
+            中国是一个拥有四季分明的国家，春天万物复苏，花朵盛开；夏天炎热，人们喜欢去海边游泳或者在树荫下乘凉；秋天凉爽，农民忙着收获庄稼；冬天寒冷，北方常常下雪，人们喜欢滑雪和堆雪人。<br>
+            每个季节都有它的特色。春天，人们喜欢踏青，感受大自然的美丽；夏天，很多人去旅游，享受阳光和海滩；秋天是丰收的季节，市场上有各种新鲜的水果和蔬菜；冬天是春节的季节，家家户户都会团聚，一起庆祝新年。
+        </p>
+        <button onclick="addNote()">添加笔记</button>
+    </div>
+
+    <div class="notes-section">
+        <h3>笔记</h3>
+        <ul id="notesList"></ul>
+    </div>
+
+    <div class="summary">
+        <h3>文章摘要</h3>
+        <p>
+            中国的四季各具特色：春天花开、夏天炎热、秋天丰收、冬天寒冷。人们根据季节安排不同的活动，如踏青、游泳、收获和庆祝春节。
+        </p>
+    </div>
+
+    <div class="questions">
+        <h3>阅读理解问题</h3>
+
+        <p>1. 中国的春天有什么特点？</p>
+        <input type="radio" name="q1" value="a"> 天气炎热<br>
+        <input type="radio" name="q1" value="b"> 万物复苏，花朵盛开<br>
+        <input type="radio" name="q1" value="c"> 常常下雪<br>
+
+        <p>2. 人们在夏天喜欢做什么？</p>
+        <input type="radio" name="q2" value="a"> 去海边游泳或乘凉<br>
+        <input type="radio" name="q2" value="b"> 收获庄稼<br>
+        <input type="radio" name="q2" value="c"> 堆雪人<br>
+
+        <p>3. 秋天是什么季节？</p>
+        <input type="radio" name="q3" value="a"> 丰收的季节<br>
+        <input type="radio" name="q3" value="b"> 下雪的季节<br>
+        <input type="radio" name="q3" value="c"> 炎热的季节<br>
+
+        <p>4. 冬天北方的天气如何？</p>
+        <input type="radio" name="q4" value="a"> 非常热<br>
+        <input type="radio" name="q4" value="b"> 常常下雪，很冷<br>
+        <input type="radio" name="q4" value="c"> 天气温暖<br>
+
+        <p>5. 春节是什么时候？</p>
+        <input type="radio" name="q5" value="a"> 夏天<br>
+        <input type="radio" name="q5" value="b"> 冬天<br>
+        <input type="radio" name="q5" value="c"> 春天<br>
+
+        <button onclick="checkAnswers()">提交答案</button>
+        <p id="result"></p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function addNote() {
+    let noteText = prompt("请输入你的笔记:");
+    if (noteText) {
+        let listItem = document.createElement('li');
+        listItem.textContent = noteText;
+        document.getElementById('notesList').appendChild(listItem);
+    }
+}
+
+function checkAnswers() {
+    let correctAnswers = ["b", "a", "a", "b", "b"];
+    let score = 0;
+    for (let i = 1; i <= 5; i++) {
+        let answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer && answer.value === correctAnswers[i - 1]) {
+            score++;
+        }
+    }
+    document.getElementById('result').textContent = `正确答案数: ${score} / 5`;
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Speaking Practice</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Speaking Practice</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #feedback {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Speak & Learn - Advanced Mode</h1>
+        <p>Enhance your speaking skills with interactive real-time practice</p>
+    </header><main>
+    <section class="speaking-mode">
+        <h2>Speaking Practice</h2>
+        <p>Press the button, listen to the phrase, and repeat it aloud.</p>
+        <div id="phrase-container">
+            <p id="phrase">Hello! How are you?</p>
+        </div>
+        <button onclick="speakPhrase()">Listen</button>
+        <button onclick="startSpeaking()">Start Speaking</button>
+        <button onclick="generateNewPhrase()">New Phrase</button>
+        <p id="feedback"></p>
+    </section>
+</main>
+
+<script>
+    const phrases = [
+        "Hello! How are you?",
+        "Nice to meet you!",
+        "What is your name?",
+        "Can you help me?",
+        "Where is the nearest restaurant?",
+        "I love learning new languages!",
+        "Practice makes perfect!",
+        "Speak confidently and clearly."
+    ];
+    
+    function speakPhrase() {
+        const phrase = document.getElementById('phrase').textContent;
+        const speech = new SpeechSynthesisUtterance(phrase);
+        speech.lang = 'en-US';
+        speech.rate = 0.9;
+        speech.pitch = 1;
+        window.speechSynthesis.speak(speech);
+    }
+
+    function startSpeaking() {
+        if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+            alert('Your browser does not support speech recognition. Please use Google Chrome or an updated browser.');
+            return;
+        }
+        
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+        recognition.start();
+        
+        recognition.onresult = function(event) {
+            const userSpeech = event.results[0][0].transcript;
+            const correctPhrase = document.getElementById('phrase').textContent;
+            
+            const similarity = compareStrings(userSpeech.toLowerCase(), correctPhrase.toLowerCase());
+            
+            if (similarity > 80) {
+                document.getElementById('feedback').textContent = 'Great job! You pronounced it correctly!';
+                document.getElementById('feedback').style.color = 'green';
+            } else {
+                document.getElementById('feedback').textContent = Try again! You said: "${userSpeech}" (Accuracy: ${similarity.toFixed(2)}%);
+                document.getElementById('feedback').style.color = 'red';
+            }
+        };
+        
+        recognition.onerror = function(event) {
+            document.getElementById('feedback').textContent = 'Error occurred: ' + event.error;
+            document.getElementById('feedback').style.color = 'red';
+        };
+    }
+
+    function generateNewPhrase() {
+        const randomIndex = Math.floor(Math.random() * phrases.length);
+        document.getElementById('phrase').textContent = phrases[randomIndex];
+        document.getElementById('feedback').textContent = "";
+    }
+
+    function compareStrings(str1, str2) {
+        let matches = 0;
+        const words1 = str1.split(' ');
+        const words2 = str2.split(' ');
+        const len = Math.max(words1.length, words2.length);
+        
+        words1.forEach((word, index) => {
+            if (words2[index] && word === words2[index]) {
+                matches++;
+            }
+        });
+        
+        return (matches / len) * 100;
+    }
+</script>
+
+</body>
+</html>
+</html>

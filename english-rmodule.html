@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Comprehension Aid</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="content">
+        <h2>The Colors of Animals</h2>
+        <p id="text">
+            The color of animals is by no means a matter of chance; it depends on many considerations, but in the majority of cases tends to protect the animal from danger by rendering it less conspicuous. 
+            Perhaps it may be said that if coloring is mainly protective, there ought to be but few brightly colored animals. There are, however, not a few cases in which vivid colors are themselves protective. 
+            The kingfisher itself, though so brightly colored, is by no means easy to see. The blue harmonizes with the water, and the bird as it darts along the stream looks almost like a flash of sunlight.
+        </p>
+        <p>
+            Desert animals are generally the color of the desert. Thus, for instance, the lion, the antelope, and the wild donkey are all sand-colored. 
+            “Indeed,” says Canon Tristram, “in the desert, where neither trees, brushwood, nor even undulation of the surface afford the slightest protection to its foes, a modification of color assimilated to that of the surrounding country is absolutely necessary. 
+            Hence, without exception, the upper plumage of every bird, and also the fur of all the smaller mammals and the skin of all the snakes and lizards, is of one uniform sand color.”
+        </p>
+        <p>
+            The next point is the color of the mature caterpillars, some of which are brown. This probably makes the caterpillar even more conspicuous among the green leaves than would otherwise be the case. 
+            Let us see, then, whether the habits of the insect will throw any light upon the riddle. 
+            What would you do if you were a big caterpillar? Why, like most other defenseless creatures, you would feed by night, and lie concealed by day. So do these caterpillars. 
+            When the morning light comes, they creep down the stem of the food plant, and lie concealed among the thick herbage and dry sticks and leaves, near the ground, 
+            and it is obvious that under such circumstances the brown color really becomes a protection.
+        </p>
+        
+    <div class="summary">
+        <h3>Summary</h3>
+        <p>
+            The coloration of animals is primarily for protection. Some blend with their environment, while others use bright colors for defense. 
+            Desert animals are usually sand-colored, and large caterpillars hide and use brown shades for camouflage.
+        </p>
+    </div>
+
+    <div class="questions">
+        <h3>Comprehension Questions</h3>
+
+        <p>1. What is the main reason animals have specific colors?</p>
+        <input type="radio" name="q1" value="a"> Random genetic chance<br>
+        <input type="radio" name="q1" value="b"> Protection from danger<br>
+        <input type="radio" name="q1" value="c"> Attraction for predators<br>
+
+        <p>2. Why are some brightly colored animals still protected?</p>
+        <input type="radio" name="q2" value="a"> They can fly<br>
+        <input type="radio" name="q2" value="b"> Their colors help them blend in with their surroundings<br>
+        <input type="radio" name="q2" value="c"> They are always poisonous<br>
+
+        <p>3. How does the kingfisher’s blue color help it?</p>
+        <input type="radio" name="q3" value="a"> It warns predators<br>
+        <input type="radio" name="q3" value="b"> It harmonizes with water and makes it hard to see<br>
+        <input type="radio" name="q3" value="c"> It is used to attract mates<br>
+
+        <p>4. Why are desert animals sand-colored?</p>
+        <input type="radio" name="q4" value="a"> To stay cool<br>
+        <input type="radio" name="q4" value="b"> To blend into their environment<br>
+        <input type="radio" name="q4" value="c"> To scare predators<br>
+
+        <p>5. According to Canon Tristram, what is necessary for desert animals?</p>
+        <input type="radio" name="q5" value="a"> Being fast<br>
+        <input type="radio" name="q5" value="b"> Having a color that matches the environment<br>
+        <input type="radio" name="q5" value="c"> Climbing trees<br>
+
+        <p>6. Why are some caterpillars brown?</p>
+        <input type="radio" name="q6" value="a"> To stand out more<br>
+        <input type="radio" name="q6" value="b"> To blend in with the ground where they hide<br>
+        <input type="radio" name="q6" value="c"> To warn birds<br>
+
+        <p>7. When do large caterpillars usually feed?</p>
+        <input type="radio" name="q7" value="a"> During the day<br>
+        <input type="radio" name="q7" value="b"> At night<br>
+        <input type="radio" name="q7" value="c"> In the morning<br>
+
+        <p>8. What does the passage suggest came first for caterpillars?</p>
+        <input type="radio" name="q8" value="a"> Their brown color<br>
+        <input type="radio" name="q8" value="b"> Their habit of hiding<br>
+        <input type="radio" name="q8" value="c"> Their wings<br>
+
+        <button onclick="checkAnswers()">Submit Answers</button>
+        <p id="result"></p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+
+function checkAnswers() {
+    let correctAnswers = ["b", "b", "b", "b", "b", "b", "b", "b"];
+    let score = 0;
+    for (let i = 1; i <= 8; i++) {
+        let answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer && answer.value === correctAnswers[i - 1]) {
+            score++;
+        }
+    }
+    document.getElementById('result').textContent = `You scored ${score}/8`;
+}
+
+    </script>
+    
+</body>
+</html>

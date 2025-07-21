@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herramienta de Comprensión Lectora</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="settings">
+        <label>Tamaño de fuente: <input type="range" id="fontSize" min="14" max="24" value="16"></label>
+        <label>Espaciado de línea: <input type="range" id="textSpacing" min="1" max="5" value="1.5"></label>
+        <label>Color de fondo: 
+            <select id="bgColor">
+                <option value="white">Blanco</option>
+                <option value="lightgray">Gris</option>
+                <option value="beige">Beige</option>
+            </select>
+        </label>
+    </div><div class="content">
+    <h2>Las Estaciones en España</h2>
+    <p id="text">
+        España disfruta de cuatro estaciones bien definidas. En primavera, los árboles florecen, el clima es templado y los días comienzan a alargarse. Muchas personas aprovechan este tiempo para salir a pasear por el campo, hacer excursiones y disfrutar del renacer de la naturaleza. También es una época en la que las lluvias pueden ser frecuentes, lo que ayuda a la vegetación a crecer y a mantener los ríos y embalses llenos de agua.<br>
+        En verano, las temperaturas suben considerablemente, especialmente en el sur del país. Las playas se llenan de turistas y lugareños que buscan refrescarse en el mar. En algunas zonas del interior, el calor puede ser sofocante, lo que lleva a muchas personas a buscar sombra o disfrutar de la piscina. Las noches de verano suelen ser agradables y se celebran muchas fiestas al aire libre, conciertos y eventos culturales.<br>
+        En otoño, el clima se vuelve más fresco y los días comienzan a acortarse. Es una época de transición en la que los árboles pierden sus hojas y los colores del paisaje cambian a tonos rojizos y dorados. Además, es un período muy importante para la agricultura, ya que es la temporada de cosecha de muchos cultivos, como la uva para la producción de vino. Muchas regiones celebran festivales de la vendimia y mercados de productos frescos.<br>
+        El invierno en España varía mucho según la región. En el norte y en las zonas montañosas, las temperaturas pueden ser muy frías y la nieve es común, lo que permite la práctica de deportes de invierno como el esquí y el snowboard. En el sur y en la costa mediterránea, los inviernos suelen ser más suaves, con temperaturas moderadas. Durante esta estación, la Navidad es la festividad más destacada, con celebraciones que incluyen mercados navideños, luces decorativas y reuniones familiares en torno a comidas tradicionales.
+    </p>
+    <button onclick="addNote()">Agregar Nota</button>
+</div>
+
+<div class="notes-section">
+    <h3>Notas</h3>
+    <ul id="notesList"></ul>
+</div>
+
+<div class="summary">
+    <h3>Resumen del Texto</h3>
+    <p>
+        España tiene cuatro estaciones distintas: primavera con flores y lluvias, verano caluroso con actividades en la playa, otoño con cosechas y paisajes dorados, e invierno con frío en el norte y festividades navideñas.
+    </p>
+</div>
+
+<div class="questions">
+    <h3>Preguntas de Comprensión</h3>
+
+    <p>1. ¿Qué sucede en primavera en España?</p>
+    <input type="radio" name="q1" value="a"> Hace mucho calor<br>
+    <input type="radio" name="q1" value="b"> Los árboles florecen y hay lluvias<br>
+    <input type="radio" name="q1" value="c"> Siempre está nevando<br>
+
+    <p>2. ¿Qué suelen hacer las personas en verano?</p>
+    <input type="radio" name="q2" value="a"> Ir a la playa o buscar sombra<br>
+    <input type="radio" name="q2" value="b"> Cosechar cultivos<br>
+    <input type="radio" name="q2" value="c"> Construir muñecos de nieve<br>
+
+    <p>3. ¿Qué sucede en otoño?</p>
+    <input type="radio" name="q3" value="a"> Es la época de cosecha y los paisajes cambian de color<br>
+    <input type="radio" name="q3" value="b"> Siempre nieva<br>
+    <input type="radio" name="q3" value="c"> Hace mucho calor<br>
+
+    <p>4. ¿Cómo es el clima en invierno en el norte de España?</p>
+    <input type="radio" name="q4" value="a"> Muy caluroso<br>
+    <input type="radio" name="q4" value="b"> Frío y con nieve<br>
+    <input type="radio" name="q4" value="c"> Siempre templado<br>
+
+    <p>5. ¿Qué celebración importante ocurre en invierno?</p>
+    <input type="radio" name="q5" value="a"> Semana Santa<br>
+    <input type="radio" name="q5" value="b"> Navidad<br>
+    <input type="radio" name="q5" value="c"> Fiesta de la Primavera<br>
+
+    <button onclick="checkAnswers()">Enviar Respuestas</button>
+    <p id="result"></p>
+</div>
+
+<script src="script.js"></script>
+<script>
+    function addNote() {
+        let noteText = prompt("Ingrese su nota:");
+        if (noteText) {
+            let listItem = document.createElement('li');
+            listItem.textContent = noteText;
+            document.getElementById('notesList').appendChild(listItem);
+        }
+    }
+
+    function checkAnswers() {
+        let correctAnswers = ["b", "a", "a", "b", "b"];
+        let score = 0;
+        for (let i = 1; i <= 5; i++) {
+            let answer = document.querySelector(input[name="q${i}"]:checked);
+            if (answer && answer.value === correctAnswers[i - 1]) {
+                score++;
+            }
+        }
+        document.getElementById('result').textContent = Respuestas correctas: ${score} / 5;
+    }
+</script>
+
+</body>
+</html>

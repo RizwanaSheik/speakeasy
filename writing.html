@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing Mode</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Writing Mode</h1>
+    <p>Welcome to the Writing section!</p>
+    <a href="index.html">Back to Home</a>
+</body>
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilingual Alphabet Writing Practice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #4a1766;
+        }
+        .alphabet-container {
+            margin-top: 20px;
+        }
+        .letter-card {
+            display: inline-block;
+            width: 200px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #101010;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 50px;
+            font-weight: bold;
+            margin: 20px;
+        }
+        select, button {
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        canvas {
+            border: 2px solid rgb(250, 248, 248);
+            margin-top: 20px;
+            background-color: rgb(238, 233, 233);
+            touch-action: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Learn and Write the Alphabet in Different Languages</h1>
+    <label for="language">Choose a Language: </label>
+    <select id="language">
+        <option value="english">English</option>
+        <option value="spanish">Spanish</option>
+        <option value="french">French</option>
+        <option value="german">German</option>
+        <option value="italian">Italian</option>
+        <option value="portuguese">Portuguese</option>
+        <option value="russian">Russian</option>
+        <option value="japanese">Japanese</option>
+        <option value="chinese">Chinese</option>
+        <option value="korean">Korean</option>
+        <option value="hindi">Hindi</option>
+        <option value="arabic">Arabic</option>
+    </select><div class="alphabet-container">
+    <div class="letter-card" id="currentLetter">A</div>
+</div>
+<canvas id="writingCanvas" width="400" height="200"></canvas>
+<br>
+<button onclick="clearCanvas()">Clear</button>
+<button onclick="checkDrawing()">Check</button>
+<button onclick="saveDrawing()">Save</button>
+
+<script>
+    const alphabetData = {
+        english: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),
+        spanish: "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split(""),
+        french: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),
+        german: "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜß".split(""),
+        italian: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),
+        portuguese: "ABCDEFGHIJKLMNOPQRSTUVWXYZÇ".split(""),
+        russian: "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ".split(""),
+        japanese: "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん".split(""),
+        chinese: "一二三四五六七八九十百千万亿".split(""),
+        korean: "가나다라마바사아자차카타파하".split(""),
+        hindi: "अआइईउऊएऐओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसह".split(""),
+        arabic: "ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي".split(" ")
+    };
+    
+    let currentLanguage = "english";
+    let currentLetterIndex = 0;
+    const letterCard = document.getElementById("currentLetter");
+    
+    function loadAlphabet(language) {
+        currentLanguage = language;
+        currentLetterIndex = 0;
+        updateLetter();
+    }
+    
+    function updateLetter() {
+        letterCard.textContent = alphabetData[currentLanguage][currentLetterIndex];
+    }
+    
+    function nextLetter() {
+        if (currentLetterIndex < alphabetData[currentLanguage].length - 1) {
+            currentLetterIndex++;
+            updateLetter();
+            clearCanvas();
+        } else {
+            alert("Congratulations! You have completed this language.");
+        }
+    }
+    
+    const canvas = document.getElementById("writingCanvas");
+    const ctx = canvas.getContext("2d");
+    let drawing = false;
+
+    function startDrawing(event) {
+        drawing = true;
+        draw(event);
+    }
+
+    function stopDrawing() {
+        drawing = false;
+        ctx.beginPath();
+    }
+
+    function draw(event) {
+        if (!drawing) return;
+        ctx.lineWidth = 4;
+        ctx.lineCap = "round";
+        ctx.strokeStyle = "black";
+        let x, y;
+        if (event.touches) {
+            x = event.touches[0].clientX - canvas.offsetLeft;
+            y = event.touches[0].clientY - canvas.offsetTop;
+        } else {
+            x = event.offsetX;
+            y = event.offsetY;
+        }
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    }
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function saveDrawing() {
+        const link = document.createElement('a');
+        link.download = 'drawing.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    }
+
+    function checkDrawing() {
+        alert("Congratulations! Moving to the next letter.");
+        nextLetter();
+    }
+
+    canvas.addEventListener("mousedown", startDrawing);
+    canvas.addEventListener("mouseup", stopDrawing);
+    canvas.addEventListener("mousemove", draw);
+     
+    // Laptop touch support (for touchscreen laptops)
+    canvas.addEventListener("pointerdown", startDrawing);
+    canvas.addEventListener("pointerup", stopDrawing);
+    canvas.addEventListener("pointermove", draw);
+    
+    canvas.addEventListener("touchstart", startDrawing);
+    canvas.addEventListener("touchend", stopDrawing);
+    canvas.addEventListener("touchmove", (event) => {
+        event.preventDefault();
+        draw(event);
+    });
+    
+    document.getElementById("language").addEventListener("change", (event) => {
+        loadAlphabet(event.target.value);
+    });
+    
+    loadAlphabet("english");
+</script>
+
+</body>
+</html>
+
+
+</html>

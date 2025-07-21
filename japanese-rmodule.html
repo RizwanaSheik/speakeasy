@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>読解サポートツール</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="settings">
+        <label>文字サイズ: <input type="range" id="fontSize" min="14" max="24" value="16"></label>
+        <label>行間: <input type="range" id="textSpacing" min="1" max="5" value="1.5"></label>
+        <label>背景色: 
+            <select id="bgColor">
+                <option value="white">白</option>
+                <option value="lightgray">グレー</option>
+                <option value="beige">ベージュ</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="content">
+        <h2>日本の四季</h2>
+        <p id="text">
+            日本には春、夏、秋、冬の四つの季節があります。春は桜が咲き、多くの人々が花見を楽しみます。夏は暑く、祭りや花火大会が各地で行われます。秋は紅葉が美しく、山々が赤や黄色に染まります。冬は寒く、北海道や長野では雪がたくさん降ります。特に正月は、日本人にとって大切な行事であり、多くの人が神社や寺に初詣に行きます。
+        </p>
+        <p>
+            日本の季節は食文化にも影響を与えます。春にはタケノコやイチゴ、夏にはスイカやそうめん、秋には栗やサンマ、冬には鍋料理が人気です。また、季節ごとの行事も多く、春にはひな祭り、夏にはお盆、秋には月見、冬にはお正月があります。
+        </p>
+        <button onclick="addNote()">ノートを追加</button>
+    </div>
+
+    <div class="notes-section">
+        <h3>ノート</h3>
+        <ul id="notesList"></ul>
+    </div>
+
+    <div class="summary">
+        <h3>要約</h3>
+        <p>
+            日本には四つの季節があり、それぞれの季節に特有のイベントや食文化があります。春は桜、夏は祭り、秋は紅葉、冬は雪やお正月など、自然と伝統が深く関わっています。
+        </p>
+    </div>
+
+    <div class="questions">
+        <h3>読解問題</h3>
+
+        <p>1. 日本の春に見られるものは何ですか？</p>
+        <input type="radio" name="q1" value="a"> 紅葉<br>
+        <input type="radio" name="q1" value="b"> 桜<br>
+        <input type="radio" name="q1" value="c"> 祭り<br>
+
+        <p>2. 夏に人気のイベントは何ですか？</p>
+        <input type="radio" name="q2" value="a"> 初詣<br>
+        <input type="radio" name="q2" value="b"> 花見<br>
+        <input type="radio" name="q2" value="c"> 花火大会<br>
+
+        <p>3. 秋に楽しめるものは何ですか？</p>
+        <input type="radio" name="q3" value="a"> クリスマス<br>
+        <input type="radio" name="q3" value="b"> 紅葉<br>
+        <input type="radio" name="q3" value="c"> 雪<br>
+
+        <p>4. 日本の冬の特徴は？</p>
+        <input type="radio" name="q4" value="a"> 暑い天気<br>
+        <input type="radio" name="q4" value="b"> 雪が降る<br>
+        <input type="radio" name="q4" value="c"> 祭りが多い<br>
+
+        <p>5. 冬に人気の食べ物は？</p>
+        <input type="radio" name="q5" value="a"> 鍋料理<br>
+        <input type="radio" name="q5" value="b"> そうめん<br>
+        <input type="radio" name="q5" value="c"> スイカ<br>
+
+        <button onclick="checkAnswers()">回答を送信</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        function addNote() {
+    let noteText = prompt("ノートを入力してください:");
+    if (noteText) {
+        let listItem = document.createElement('li');
+        listItem.textContent = noteText;
+        document.getElementById('notesList').appendChild(listItem);
+    }
+}
+
+function checkAnswers() {
+    let correctAnswers = ["b", "c", "b", "b", "a"];
+    let score = 0;
+    for (let i = 1; i <= 5; i++) {
+        let answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer && answer.value === correctAnswers[i - 1]) {
+            score++;
+        }
+    }
+    document.getElementById('result').textContent = `正解数: ${score} / 5`;
+}
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
